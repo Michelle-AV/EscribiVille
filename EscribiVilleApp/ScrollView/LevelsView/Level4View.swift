@@ -3,6 +3,8 @@ import SwiftUI
 struct Level4View: View {
     
     @Binding var level4: Bool
+    @State var isMute: Bool = false
+    @State var isCorrect: Bool = false
     
     @State var card1R: Double = 5
     @State var card2R: Double = -6
@@ -43,6 +45,41 @@ struct Level4View: View {
             Image("base4")
                 .resizable()
                 .scaledToFill()
+            
+            Image("btnSalir")
+                .resizable()
+                .scaledToFit()
+                .frame(width: UIScreen.main.bounds.width * 0.06)
+                .position(x: UIScreen.main.bounds.width * 0.08, y: UIScreen.main.bounds.height * 0.08)
+                .onTapGesture {
+                    withAnimation(.spring(duration: 0.2)){
+                        level4.toggle()
+                        currentCard1X = 0
+                        currentCard1Y = 0
+                        currentCard2X = 0
+                        currentCard2Y = 0
+                        currentCard3X = 0
+                        currentCard3Y = 0
+                        currentCard4X = 0
+                        currentCard4Y = 0
+                        currentCard5X = 0
+                        currentCard5Y = 0
+                        card1R = 5
+                        card2R = -6
+                        card3R = 12
+                        card5R = -15
+                        card4R = -4
+                    }
+                }
+            
+            Image(isMute ? "btnMute" : "btnVolumen")
+                .resizable()
+                .scaledToFit()
+                .frame(width: UIScreen.main.bounds.width * 0.06)
+                .position(x: UIScreen.main.bounds.width * 0.92, y: UIScreen.main.bounds.height * 0.08)
+                .onTapGesture {
+                    isMute.toggle()
+                }
             
             HStack(spacing: 25){
                 
@@ -107,6 +144,7 @@ struct Level4View: View {
                                     currentCard1X = -235
                                     currentCard1Y = 485
                                     card1R = 0
+                                    checkCorrect()
                                 }
                             } else {
                                 withAnimation(.spring()) {
@@ -149,6 +187,7 @@ struct Level4View: View {
                                     currentCard2X = -55
                                     currentCard2Y = 462
                                     card2R = 0
+                                    checkCorrect()
                                 }
                             } else {
                                 withAnimation(.spring()) {
@@ -191,6 +230,7 @@ struct Level4View: View {
                                     currentCard3X = -330
                                     currentCard3Y = 280
                                     card3R = 0
+                                    checkCorrect()
                                 }
                             } else {
                                 withAnimation(.spring()) {
@@ -233,6 +273,7 @@ struct Level4View: View {
                                     currentCard5X = -281
                                     currentCard5Y = 290
                                     card5R = 0
+                                    checkCorrect()
                                 }
                             } else {
                                 withAnimation(.spring()) {
@@ -250,7 +291,7 @@ struct Level4View: View {
                     .resizable()
                     .scaledToFit()
                     .frame(width: cardSize)
-            
+                
                 Text("Z")
                     .font(.custom("futura", fixedSize: 70))
                     .bold()
@@ -275,6 +316,7 @@ struct Level4View: View {
                                     currentCard4X = -663
                                     currentCard4Y = 260
                                     card4R = 0
+                                    checkCorrect()
                                 }
                             } else {
                                 withAnimation(.spring()) {
@@ -285,10 +327,37 @@ struct Level4View: View {
                             }
                         }
                 )
+        
+            CongratsView(isCorrect: $isCorrect)
+                .offset(y: isCorrect ? 0 : UIScreen.main.bounds.height + 500)
+                .animation(.spring(duration: 0.3))
             
         }.ignoresSafeArea()
             .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
         .background(Color.white)
+    }
+    
+    func checkCorrect(){
+        if(currentCard1X == -235 && currentCard1Y == 485 && currentCard2X == -55 && currentCard2Y == 462 && currentCard3X == -330 && currentCard3Y == 280 && currentCard5X == -281 && currentCard5Y == 290 && currentCard4X == -663 && currentCard4Y == 260){
+            isCorrect.toggle()
+            withAnimation(.spring(duration: 1)) {
+//                currentCard1X = 0
+//                currentCard1Y = 0
+//                currentCard2X = 0
+//                currentCard2Y = 0
+//                currentCard3X = 0
+//                currentCard3Y = 0
+//                currentCard4X = 0
+//                currentCard4Y = 0
+//                currentCard5X = 0
+//                currentCard5Y = 0
+//                card1R = 5
+//                card2R = -6
+//                card3R = 12
+//                card5R = -15
+//                card4R = -4
+            }
+        }
     }
 }
 
