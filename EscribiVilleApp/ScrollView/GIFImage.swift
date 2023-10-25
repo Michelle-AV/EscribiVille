@@ -19,6 +19,7 @@ struct GIFImage: UIViewRepresentable {
                      characterEncodingName: "UTF-8",
                      baseURL: url.deletingLastPathComponent()
         )
+        webView.isOpaque = false
         return webView
     }
     
