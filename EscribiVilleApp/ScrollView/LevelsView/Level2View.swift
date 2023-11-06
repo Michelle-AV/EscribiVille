@@ -364,7 +364,7 @@ struct Level2View: View {
                             if(currentCard1X > 35 && currentCard1X < 210 && currentCard1Y < -530 && currentCard1Y > -600){
                                 withAnimation(.spring(duration: 0.4)){
                                     currentCard1X = 123
-                                    currentCard1Y = -568
+                                    currentCard1Y = -558
                                     if(pagina == true){
                                         currentCard1X = 0
                                         currentCard1Y = 0
@@ -406,7 +406,7 @@ struct Level2View: View {
                                     currentCard2Y = 0
                                     if(pagina == true){
                                         currentCard2X = -181
-                                        currentCard2Y = -526
+                                        currentCard2Y = -517
                                     }
                                 }
                             } else {
@@ -441,8 +441,8 @@ struct Level2View: View {
                         .onEnded{ value in
                             if(currentCard3X > -370 && currentCard3X < -180 && currentCard3Y < -410 && currentCard3Y > -475){
                                 withAnimation(.spring(duration: 0.4)){
-                                    currentCard3X = -276
-                                    currentCard3Y = -443
+                                    currentCard3X = -273
+                                    currentCard3Y = -435
                                     if(pagina == true){
                                         currentCard3X = 0
                                         currentCard3Y = 0
@@ -482,8 +482,8 @@ struct Level2View: View {
                                     currentCard4X = 0
                                     currentCard4Y = 0
                                     if(pagina == true){
-                                        currentCard4X = -326
-                                        currentCard4Y = -401
+                                        currentCard4X = -321
+                                        currentCard4Y = -392
                                     }
                                 }
                             } else {
@@ -517,8 +517,8 @@ struct Level2View: View {
                         .onEnded{ value in
                             if(currentCard5X > -685 && currentCard5X < -505 && currentCard5Y < -240 && currentCard5Y > -310){
                                 withAnimation(.spring(duration: 0.4)){
-                                    currentCard5X = -592
-                                    currentCard5Y = -275
+                                    currentCard5X = -587
+                                    currentCard5Y = -271
                                     if(pagina == true){
                                         currentCard5X = 0
                                         currentCard5Y = 0
@@ -559,13 +559,12 @@ struct Level2View: View {
                 .offset(y: isCorrect ? 0 : UIScreen.main.bounds.height + 500)
                 .animation(.spring(duration: 0.3))
             
-            
         }.ignoresSafeArea()
             .background(Color.Lima)
     }
     
     func checkOpacity1(){
-        if(self.pagina == true && currentCard1X == 123 && currentCard1Y == -568){
+        if(self.pagina == true && currentCard1X == 123 && currentCard1Y == -558){
             opacidad1 = 0
         } else if(self.pagina == false){
             opacidad1 = 1
@@ -573,7 +572,7 @@ struct Level2View: View {
     }
     
     func checkOpacity2(){
-        if(self.pagina == false && currentCard2X == -181 && currentCard2Y == -526){
+        if(self.pagina == false && currentCard2X == -181 && currentCard2Y == -517){
             opacidad2 = 0
         } else if(self.pagina == true){
             opacidad2 = 1
@@ -581,7 +580,7 @@ struct Level2View: View {
     }
     
     func checkOpacity3(){
-        if(self.pagina == true && currentCard3X == -276 && currentCard3Y == -443){
+        if(self.pagina == true && currentCard3X == -273 && currentCard3Y == -435){
             opacidad3 = 0
         } else if(self.pagina == false){
             opacidad3 = 1
@@ -589,7 +588,7 @@ struct Level2View: View {
     }
     
     func checkOpacity4(){
-        if(self.pagina == false && currentCard4X == -326 && currentCard4Y == -401){
+        if(self.pagina == false && currentCard4X == -321 && currentCard4Y == -392){
             opacidad4 = 0
         } else if(self.pagina == true){
             opacidad4 = 1
@@ -597,7 +596,7 @@ struct Level2View: View {
     }
     
     func checkOpacity5(){
-        if(self.pagina == true && currentCard5X == -592 && currentCard5Y == -275){
+        if(self.pagina == true && currentCard5X == -587 && currentCard5Y == -271){
             opacidad5 = 0
         } else if(self.pagina == false){
             opacidad5 = 1
@@ -605,7 +604,7 @@ struct Level2View: View {
     }
     
     func checkCorrect(){
-        if(currentCard1X == 123 && currentCard1Y == -568 && currentCard2X == -181 && currentCard2Y == -526 && currentCard3X == -276 && currentCard3Y == -443 && currentCard5X == -592 && currentCard5Y == -275 && currentCard4X == -326 && currentCard4Y == -401){
+        if(currentCard1X == 123 && currentCard1Y == -558 && currentCard2X == -181 && currentCard2Y == -517 && currentCard3X == -273 && currentCard3Y == -435 && currentCard5X == -587 && currentCard5Y == -271 && currentCard4X == -321 && currentCard4Y == -392){
             isCorrect.toggle()
             SoundManager.instance.playSound()
             withAnimation(.spring(duration: 1)) {
