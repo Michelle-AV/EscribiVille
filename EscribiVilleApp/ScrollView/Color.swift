@@ -6,6 +6,8 @@ extension Color {
     
     public static let Verde: Color = Color(UIColor(red: 0.59, green: 0.75, blue: 0.25,alpha: 1.00))
     
+    public static let Lima: Color = Color(UIColor(red: 0.62, green: 0.76, blue: 0.30, alpha: 1.00))
+    
     public static let Sand: Color = Color(UIColor(red: 0.95, green: 0.78, blue: 0.58,alpha: 1.00))
     
     public static let Mar: Color = Color(UIColor(red: 0.11, green: 0.40, blue: 0.65,alpha: 1.00))
