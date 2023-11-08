@@ -21,4 +21,8 @@ extension Color {
     public static let Cafe: Color = Color(UIColor(red: 0.60, green: 0.51, blue: 0.47, alpha: 1.00))
     
     public static let CafeOscuro: Color = Color(uiColor: UIColor(red: 0.49, green: 0.26, blue: 0.21, alpha: 1.00))
+    
+    public static let ArenaOscura: Color = Color(UIColor(red: 0.93, green: 0.65, blue: 0.43, alpha: 1.00))
+    
+    public static let GrisClaro: Color = Color(UIColor(red: 0.88, green: 0.89, blue: 0.90, alpha: 1.00))
 }
