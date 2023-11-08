@@ -1,3 +1,4 @@
+
 import SwiftUI
 
 struct Level5View: View {
@@ -14,13 +15,7 @@ struct Level5View: View {
     
     @State var posiConejoX: CGFloat = UIScreen.main.bounds.width * 0.75
     @State var posiConejoY: CGFloat = UIScreen.main.bounds.height * 0.58
-    
-//    @State var posiPajaroX: CGFloat = UIScreen.main.bounds.width * 0.35
-//    @State var posiPajaroY: CGFloat = UIScreen.main.bounds.height * 0.58
-//    
-//    @State var posiConejoX: CGFloat = UIScreen.main.bounds.width * 0.65
-//    @State var posiConejoY: CGFloat = UIScreen.main.bounds.height * 0.58
-    
+
     @State var instruccion: String = "Selecciona al búho"
     
     var cardSize: CGFloat = UIScreen.main.bounds.width * 0.23
@@ -41,10 +36,13 @@ struct Level5View: View {
                 .foregroundStyle(Color.Gris)
                 .position(x: UIScreen.main.bounds.width * 0.5, y: UIScreen.main.bounds.height * 0.16)
             
+            
+            
+            
             Image("btnSalir")
                 .resizable()
                 .scaledToFit()
-                .frame(width: UIScreen.main.bounds.width * 0.045)
+                .frame(width: UIScreen.main.bounds.width * 0.055)
                 .position(x: UIScreen.main.bounds.width * 0.06, y: UIScreen.main.bounds.height * 0.09)
                 .onTapGesture {
                     withAnimation(.spring(duration: 0.2)){
@@ -60,7 +58,7 @@ struct Level5View: View {
             Image(isMute ? "btnMute" : "btnVolumen")
                 .resizable()
                 .scaledToFit()
-                .frame(width: UIScreen.main.bounds.width * 0.045)
+                .frame(width: UIScreen.main.bounds.width * 0.055)
                 .position(x: UIScreen.main.bounds.width * 0.94, y: UIScreen.main.bounds.height * 0.09)
                 .onTapGesture {
                     isMute.toggle()
@@ -214,7 +212,7 @@ struct Level5View: View {
     func checkCorrect(){
         isCorrect.toggle()
         SoundManager.instance.playSound()
-
+        
     }
 }
 
