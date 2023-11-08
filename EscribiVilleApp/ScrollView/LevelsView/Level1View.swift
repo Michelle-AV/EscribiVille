@@ -1,213 +1,359 @@
+
 import SwiftUI
 
 struct Level1View: View {
+    
     @Binding var level1: Bool
-    @State private var currentPage = 1
     @State var isMute: Bool = false
     @State var isCorrect: Bool = false
-    //let maxPages = 6
     
-    var body: some View {
-       VStack {
-           ZStack{
-               Image("btnSalir")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: UIScreen.main.bounds.width * 0.06)
-                    .position(x: UIScreen.main.bounds.width * 0.08, y: UIScreen.main.bounds.height * 0.08)
-                    .onTapGesture {
-                        withAnimation(.spring(duration: 0.2)){
-                            currentPage = 0
-                    }
-            }
-               Image(isMute ? "btnMute" : "btnVolumen")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: UIScreen.main.bounds.width * 0.06)
-                    .position(x: UIScreen.main.bounds.width * 0.92, y: UIScreen.main.bounds.height * 0.08)
-                    .onTapGesture {
-                        isMute.toggle()
-                    }
-            Button(action: {
-                withAnimation {
-                    currentPage += 1
-                    if currentPage > 6 {
-                        currentPage = 1
-                    }
-                }
-            }) {
-                Text("Siguiente".uppercased())
-                    .font(.system(size: 30, weight: .bold, design: .rounded))
-                    .foregroundColor(.white)
-                    .padding()
-                    .overlay(RoundedRectangle(cornerRadius: 10)
-                        .stroke(Color .white, lineWidth: 2))
-                    .background(Color.mint)
-                    .cornerRadius(10)
-                    .shadow(radius: 10)
-                }.position(CGPoint(x: 600.0, y: 80.0))
-                .ignoresSafeArea()
-                .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
-               // .background(Color.white)
-                
-                if currentPage == 1 {
-                    Page1View()
-                } else if currentPage == 2{
-                    Page2View()
-                } else if currentPage == 3{
-                    Page3View()
-                } else if currentPage == 4{
-                    Page4View()
-                } else if currentPage == 5{
-                    Page5View()
-                } else {
-                    Page6View()
-                }
-            }.background(Color.white)
-           
-        }
-    }
-}
+    //variables de las cartas
+    @State var isCard1: Bool = true
+    @State var isCard2: Bool = false
+    @State var isCard3: Bool = false
+    @State var isCard4: Bool = false
+    @State var isCard5: Bool = false
+    @State var isCard6: Bool = false
 
-struct Page1View: View {
-    var body: some View {
-        HStack(spacing: 30){
-            
-            Image("imagen1")
-                .resizable()
-                .scaledToFit()
-                .frame(height: UIScreen.main.bounds.height * 0.80)
-                .position(CGPoint(x: 260.0, y: 440.0))
-                .shadow(radius: 30)
-            
-          Text("En un bosque alegre vivía Tito, un conejito con orejas largas y suaves")
-                .font(.custom("futura", fixedSize: 55).bold())
-                .foregroundStyle(Color.Gris)
-                .position(CGPoint(x: 300.0, y: 210.0)) //texto
-                .frame(width: UIScreen.main.bounds.width * 0.50, height: UIScreen.main.bounds.height * 0.5)// tamaño del recuadro
-                .background(Color.Blanco)
-                .cornerRadius(20)
-                .position(x: 230, y: 440) //cuadro
-           
-        }
-    }
-}
+    //variables para que las cartas empicen en el mismo punto de pantalla (una encima de la otra)
+    @State var startCardsX: CGFloat = UIScreen.main.bounds.width * 0.5
+    @State var startCardsY: CGFloat = UIScreen.main.bounds.width * 0.34
+
+    //variables para que la carta mueva su posicion horizontalmente (1 c/carta)
+    @State var currentCard1X: CGFloat = 0
+    @State var currentCard2X: CGFloat = 0
+    @State var currentCard3X: CGFloat = 0
+    @State var currentCard4X: CGFloat = 0
+    @State var currentCard5X: CGFloat = 0
+    @State var currentCard6X: CGFloat = 0
     
-struct Page2View: View {
+    var UISW: CGFloat = UIScreen.main.bounds.width
+    var UISH: CGFloat = UIScreen.main.bounds.height
+
     var body: some View {
-        VStack(spacing: 30){
-            Image("imagen2")
+        
+        ZStack{
+            Color.black.opacity(0.6)
+            
+            Image("btnSalir")
                 .resizable()
                 .scaledToFit()
-                .frame(height: UIScreen.main.bounds.height * 0.5)
-                .position(CGPoint(x: 600.0, y: 330.0))
-                .shadow(radius: 30)
-               
+                .frame(width: UIScreen.main.bounds.width * 0.055)
+                .position(x: UIScreen.main.bounds.width * 0.04, y: UIScreen.main.bounds.height * 0.06)
+                .onTapGesture {
+                    withAnimation(.spring(duration: 0.2)){
+                        level1.toggle()
+                    }
+                }
             
-            Text("A Tito le gustaba mucho explorar, pero a veces se sentía asustado porque era pequeñito")
-                .font(.custom("futura", fixedSize: 55).bold())
-                .foregroundStyle(Color.Gris)
-                .position(CGPoint(x: 500.0, y: 120.0))
-                .frame(width: UIScreen.main.bounds.width * 0.85, height: UIScreen.main.bounds.height * 0.3)
-                .background(Color.Blanco)
-                .cornerRadius(20)
-                .position(x: UIScreen.main.bounds.width * 0.500, y: UIScreen.main.bounds.height * 0.3)
-        }
-    }
-}
-    
-struct Page3View: View {
-    var body: some View {
-        HStack(spacing: 30){
-            Image("imagen3")
+            Image(isMute ? "btnMute" : "btnVolumen")
                 .resizable()
                 .scaledToFit()
-                .frame(height: UIScreen.main.bounds.height * 0.85)
-                .position(CGPoint(x: 260.0, y: 420.0))
-                .shadow(radius: 30)
-                
+                .frame(width: UIScreen.main.bounds.width * 0.055)
+                .position(x: UIScreen.main.bounds.width * 0.96, y: UIScreen.main.bounds.height * 0.06)
+                .onTapGesture {
+                    isMute.toggle()
+                }
+        
+                RoundedRectangle(cornerRadius: 25.0)
+                    .foregroundColor(Color.CafeOscuro)
+                    .frame(width: UISW * 0.89, height: UISH * 0.862)
+                    .padding(.bottom,-30)
             
-            Text("Un día mientras jugaba, Tito encontró un pajarito que se sentía triste")
-                .font(.custom("futura", fixedSize: 55).bold())
-                .foregroundStyle(Color.Gris)
-                .position(CGPoint(x: 300.0, y: 210.0))
-                .frame(width: UIScreen.main.bounds.width * 0.50, height: UIScreen.main.bounds.height * 0.5)
-                .background(Color.Blanco)
-                .cornerRadius(20)
-                .position(x: 230, y: 440)
+            RoundedRectangle(cornerRadius: 25.0)
+                .foregroundColor(Color(uiColor: UIColor(red: 0.72, green: 0.72, blue: 0.72, alpha: 1.00)))
+                .frame(width: UISW * 0.83, height: UISH * 0.626)
+//                .padding(.bottom,-0)
             
-        }
-    }
-}
-    
-struct Page4View: View {
-    var body: some View {
-        ZStack {
-            Image("imagen4")
-                .resizable()
-                .scaledToFit()
-                .frame(height: UIScreen.main.bounds.height * 0.80)
-                .position(CGPoint(x: 900.0, y: 440.0))
-                .shadow(radius: 30)
-          
-            HStack {
-                    Text("Tito lo cuidó y lo hizo sentir mejor. Se hicieron amigos y juntos descubrieron el bosque.")
-                    .font(.custom("futura", fixedSize: 55).bold())
-                    .foregroundStyle(Color.Gris)
-                    .position(CGPoint(x: 310.0, y: 250.0))
-                    .frame(width: UIScreen.main.bounds.width * 0.5, height: UIScreen.main.bounds.height * 0.6)
-                    .background(Color.Blanco)
-                    .cornerRadius(20)
-                    .position(CGPoint(x: 340.0, y: 440.0))
+            //CARTA 6 --------------------------------------------------
+            ZStack {
+                RoundedRectangle(cornerRadius: 25.0)
+                    .foregroundColor(Color.Blanco)
+                    .frame(width: UISW * 0.83, height: UISH * 0.66)
+                    .padding(.top, -35)
+                HStack{
+                    Image("6")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: UIScreen.main.bounds.width * 0.28)
+                        .padding(.top, -20)
+                    
+                    VStack (spacing: 50) {
+                        
+                        Text("Desde entonces, Tito y su amigo pajarito vivieron aventuras felices. Tito sabía que no importa cuán pequeño seas, ¡puedes hacer cosas asombrosas!")
+                            .font(.custom("futura", fixedSize: 25))
+                        
+                        Text("FIN.")
+                            .font(.custom("futura", fixedSize: 50))
+                    
+                    }
+                    .foregroundStyle(Color.CafeOscuro)
+                    .bold()
+                    .multilineTextAlignment(.center)
+                    .lineSpacing(10)
+                    .frame(width: 400, height: 400)
+                    .padding(.leading, 50)
+                }
+
             }
-        }
+            .position(x: startCardsX, y: startCardsY)
+            .offset(x: currentCard6X, y: UIScreen.main.bounds.height * 0)
+            // FIN CARTA ------------------------------------------------
+            
+            
+            //CARTA 5 --------------------------------------------------
+            ZStack {
+                RoundedRectangle(cornerRadius: 25.0)
+                        .foregroundColor(Color.Blanco)
+                        .frame(width: UISW * 0.83, height: UISH * 0.66)
+                        .padding(.top, -35)
+                ZStack{
+                    Image("5")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: UIScreen.main.bounds.width * 0.58)
+                        .padding(.top, -20)
+                    
+                    VStack {
+                        Text("Tito aprendió que ser valiente significa ayudar a los amigos, ¡y eso lo convirtió en un héroe en su mundo!")
+                            .font(.custom("futura", fixedSize: 20))
+                            .bold()
+                        .foregroundStyle(Color.CafeOscuro)
+                        .multilineTextAlignment(.center)
+                    .lineSpacing(10)
+                    }
+                    .frame(width: UISW * 0.7, height: UISH * 0.1)
+                    .background(Color.white)
+                    .position(x: UISW * 0.5, y: UISH * 0.73)
+                    
+                }
+
+            }
+            .position(x: startCardsX, y: startCardsY)
+            .offset(x: currentCard5X, y: UIScreen.main.bounds.height * 0)
+            // FIN CARTA ------------------------------------------------
+
+            //CARTA 4 --------------------------------------------------
+            ZStack {
+                RoundedRectangle(cornerRadius: 25.0)
+                    .foregroundColor(Color.Blanco)
+                    .frame(width: UISW * 0.83, height: UISH * 0.66)
+                    .padding(.top, -35)
+                HStack (spacing: 80) {
+                    Image("4")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: UIScreen.main.bounds.width * 0.26)
+                        .padding(.top, -25)
+//                        .padding(.leading, -20)
+                    
+                    VStack {
+                        Text("Tito lo cuidó y lo hizo sentir mejor. Se hicieron amigos y juntos descubrieron el bosque.")
+                            .font(.custom("futura", fixedSize: 25))
+                            .bold()
+                        .foregroundStyle(Color.CafeOscuro)
+                        .multilineTextAlignment(.center)
+                    .lineSpacing(10)
+                    }
+                    .frame(width: 400, height: 400)
+//                    .padding(.leading, 30)
+                }
+
+            }
+            .position(x: startCardsX, y: startCardsY)
+            .offset(x: currentCard4X, y: UIScreen.main.bounds.height * 0)
+            //FIN CARTA ------------------------------------------------
+
+            
+            //CARTA 3 --------------------------------------------------
+            ZStack {
+                RoundedRectangle(cornerRadius: 25.0)
+                    .foregroundColor(Color.Blanco)
+                    .frame(width: UISW * 0.83, height: UISH * 0.66)
+                    .padding(.top, -35)
+                
+                HStack {
+                     VStack {
+                        Text("Un día, mientras jugaba, Tito encontró un pajarito que se sentía triste.")
+                            .font(.custom("futura", fixedSize: 25))
+                            .bold()
+                        .foregroundStyle(Color.CafeOscuro)
+                        .multilineTextAlignment(.center)
+                    .lineSpacing(10)
+                    }
+                    .frame(width: 400, height: 400)
+                    .padding(.trailing, 50)
+                    
+                    Image("3")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: UIScreen.main.bounds.width * 0.28)
+                        .padding(.top, -50)
+                }
+
+            }
+            .position(x: startCardsX, y: startCardsY)
+            .offset(x: currentCard3X, y: UIScreen.main.bounds.height * 0)
+            //FIN CARTA ------------------------------------------------
+
+            
+            //CARTA 2 --------------------------------------------------
+            ZStack {
+                RoundedRectangle(cornerRadius: 25.0)
+                        .foregroundColor(Color.Blanco)
+                        .frame(width: UISW * 0.83, height: UISH * 0.66)
+                        .padding(.top, -35)
+                ZStack{
+                    Image("2")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: UIScreen.main.bounds.width * 0.64)
+                    
+                    VStack {
+                        Text("A Tito le gustaba mucho explorar, pero a veces se sentía asustado porque era pequeñito.")
+                            .font(.custom("futura", fixedSize: 20))
+                            .bold()
+                        .foregroundStyle(Color.CafeOscuro)
+                        .multilineTextAlignment(.center)
+                    .lineSpacing(10)
+                    }
+                    .frame(width: UISW * 0.7, height: UISH * 0.1)
+                    .background(Color.white)
+                    .position(x: UISW * 0.5, y: UISH * 0.701)
+                    
+                }
+
+            }
+            .position(x: startCardsX, y: startCardsY)
+            .offset(x: currentCard2X, y: UIScreen.main.bounds.height * 0)
+            //FIN CARTA ------------------------------------------------
+
+            
+            //CARTA 1 --------------------------------------------------
+            ZStack {
+                RoundedRectangle(cornerRadius: 25.0)
+                    .foregroundColor(Color.Blanco)
+                    .frame(width: UISW * 0.83, height: UISH * 0.66)
+                    .padding(.top, -35)
+                
+                HStack{
+                    Image("1")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: UIScreen.main.bounds.width * 0.26)
+                    
+                    VStack {
+                        Text("En un bosque alegre, vivía Tito, un conejito con orejas largas y suaves.")
+                            .font(.custom("futura", fixedSize: 25))
+                            .bold()
+                        .foregroundStyle(Color.CafeOscuro)
+                        .multilineTextAlignment(.center)
+                    .lineSpacing(10)
+                    }
+                    .frame(width: 400, height: 400)
+                    .padding(.leading, 50)
+                }
+
+            }
+            .position(x: startCardsX, y: startCardsY)
+            // Con este, le damos a entender que el objeto mezcla entre los valores del position y los del offset
+            // 0.5 en position y 0.5 en offset, digamos que se mueve el valor, entonces, por eso lo dejamos en 0
+            .offset(x: currentCard1X, y: UIScreen.main.bounds.height * 0)
+            //FIN CARTA ------------------------------------------------
+
+
+            
+            //BOTONES PARA "CAMBIAR LA HOJA"
+            HStack(spacing: 20){
+                
+                Button{
+                    withAnimation(.spring(duration: 1.4)){
+                        if(isCard2 == true){
+                            currentCard1X = 0
+                            isCard2 = false
+                            isCard1 = true
+                        } else if(isCard3 == true){
+                            currentCard2X = 0
+                            isCard2 = true
+                            isCard3 = false
+                        } else if(isCard4 == true){
+                            currentCard3X = 0
+                            isCard3 = true
+                            isCard4 = false
+                        } else if(isCard5 == true){
+                            currentCard4X = 0
+                            isCard4 = true
+                            isCard5 = false
+                        } else if(isCard6 == true){
+                            currentCard5X = 0
+                            isCard5 = true
+                            withAnimation(.spring(duration: 0.1)){
+                                isCard6 = false
+                            }
+                        }
+                    }
+                } label: {
+                    Text("Anterior")
+                        .font(.custom("Futura", size: 25))
+                        .foregroundColor(.white)
+                        .padding(.horizontal, 43)
+                        .padding(.vertical,16.5)
+                }
+                .background(Color.Turquesa)
+                .cornerRadius(10)
+                .padding(.bottom, 50)
+                .padding(.leading, 2)
+                .opacity(isCard1 ? 0 : 1)
+                
+                Button{
+                    withAnimation(.spring(duration: 1.4)){
+                        if(isCard1 == true){
+                            currentCard1X = UISW * 2
+                            isCard1 = false
+                            isCard2 = true
+                        } else if(isCard2 == true){
+                            currentCard2X = UISW * 2
+                            isCard2 = false
+                            isCard3 = true
+                        } else if(isCard3 == true){
+                            currentCard3X = UISW * 2
+                            isCard3 = false
+                            isCard4 = true
+                        }
+                        else if(isCard4 == true){
+                            currentCard4X = UISW * 2
+                            isCard4 = false
+                            isCard5 = true
+                        }
+                        else if(isCard5 == true){
+                            currentCard5X = UISW * 2
+                            isCard5 = false
+                            withAnimation(.spring(duration: 0.1)){
+                                isCard6 = true
+                            }
+                        }
+                        
+                    }
+                } label: {
+                    Text("Siguiente")
+                        .font(.custom("Futura", size: 25))
+                        .foregroundColor(.white)
+                        .padding(.horizontal, 35)
+                        .padding(.vertical)
+                }
+                .background(Color.Turquesa)
+                .cornerRadius(10)
+                .padding(.bottom, 50)
+                .padding(.leading, 2)
+                .opacity(isCard6 ? 0 : 1)
+
+            }
+            .position(x: isCard6 ? UISW * 0.6 : UISW * 0.51, y: UISH * 0.91)
+            .offset(x: isCard1 ?  UISW * -0.086 : 0 , y: 0)
+     
+        }.ignoresSafeArea()
     }
-}
     
-struct Page5View: View {
-    var body: some View {
-        VStack(spacing: 20){
-            Image("imagen5")
-                .resizable()
-                .scaledToFit()
-                .frame(height: UIScreen.main.bounds.height * 0.60)
-                .position(CGPoint(x: 600.0, y: 290.0))
-                .shadow(radius: 30)
-           
-            
-            Text("Tito aprendió que ser valiente significa ayudar a los amigos, ¡y eso lo convirtió en un héroe en su mundo!")
-                .font(.custom("futura", fixedSize: 50).bold())
-                .foregroundStyle(Color.Gris)
-                .position(CGPoint(x: 535.0, y: 97.0))
-                .frame(width: UIScreen.main.bounds.width * 0.9, height: UIScreen.main.bounds.height * 0.25)
-                .background(Color.Blanco)
-                .cornerRadius(20)
-                .position(x: UIScreen.main.bounds.width * 0.500, y: UIScreen.main.bounds.height * 0.3)
-            
-        }
-    }
-}
-    
-struct Page6View: View {
-    var body: some View {
-        HStack {
-            Image("imagen6")
-                .resizable()
-                .scaledToFit()
-                .frame(width: 450)
-                .position(CGPoint(x: 260.0, y: 410.0))
-                .shadow(radius: 30)
-            
-            Text("Desde entonces, Tito y su amigo Mati vivieron aventuras felices. Tito sabía que no importa cuán pequeño seas, ¡Puedes hacer cosas asombrosas!")
-                .font(.custom("futura", fixedSize: 50).bold())
-                .foregroundStyle(Color.Gris)
-                .position(CGPoint(x: 305.0, y: 300.0))
-                .frame(width: UIScreen.main.bounds.width * 0.50, height: UIScreen.main.bounds.height * 0.75)// tamaño del marco (ancho-largo)
-                .background(Color.Blanco)
-                .cornerRadius(20)
-                .position(x: 220, y: 450)
-        }
-    }
 }
 
 struct Level1View_Previews: PreviewProvider {
@@ -217,3 +363,4 @@ struct Level1View_Previews: PreviewProvider {
         return Level1View(level1: level1.projectedValue)
     }
 }
+
