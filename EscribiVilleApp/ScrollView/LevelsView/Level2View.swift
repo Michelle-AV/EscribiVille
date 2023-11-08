@@ -53,14 +53,17 @@ struct Level2View: View {
                 .scaledToFill()
     
             
+            
             Image(isMute ? "btnMute" : "btnVolumen")
                 .resizable()
                 .scaledToFit()
-                .frame(width: UIScreen.main.bounds.width * 0.06)
-                .position(x: UIScreen.main.bounds.width * 0.92, y: UIScreen.main.bounds.height * 0.08)
+                .frame(width: UIScreen.main.bounds.width * 0.055)
+                .position(x: UIScreen.main.bounds.width * 0.96, y: UIScreen.main.bounds.height * 0.06)
                 .onTapGesture {
                     isMute.toggle()
                 }
+            
+
             
             ZStack{
                 RoundedRectangle(cornerRadius: 25.0)
@@ -537,8 +540,8 @@ struct Level2View: View {
             Image("btnSalir")
                 .resizable()
                 .scaledToFit()
-                .frame(width: UIScreen.main.bounds.width * 0.06)
-                .position(x: UIScreen.main.bounds.width * 0.08, y: UIScreen.main.bounds.height * 0.08)
+                .frame(width: UIScreen.main.bounds.width * 0.055)
+                .position(x: UIScreen.main.bounds.width * 0.04, y: UIScreen.main.bounds.height * 0.06)
                 .onTapGesture {
                     withAnimation(.spring(duration: 0.2)){
                         level2.toggle()
