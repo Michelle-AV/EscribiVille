@@ -46,11 +46,12 @@ struct Level4View: View {
                 .resizable()
                 .scaledToFill()
             
+            
             Image("btnSalir")
                 .resizable()
                 .scaledToFit()
-                .frame(width: UIScreen.main.bounds.width * 0.06)
-                .position(x: UIScreen.main.bounds.width * 0.08, y: UIScreen.main.bounds.height * 0.08)
+                .frame(width: UIScreen.main.bounds.width * 0.055)
+                .position(x: UIScreen.main.bounds.width * 0.06, y: UIScreen.main.bounds.height * 0.09)
                 .onTapGesture {
                     withAnimation(.spring(duration: 0.2)){
                         level4.toggle()
@@ -75,8 +76,8 @@ struct Level4View: View {
             Image(isMute ? "btnMute" : "btnVolumen")
                 .resizable()
                 .scaledToFit()
-                .frame(width: UIScreen.main.bounds.width * 0.06)
-                .position(x: UIScreen.main.bounds.width * 0.92, y: UIScreen.main.bounds.height * 0.08)
+                .frame(width: UIScreen.main.bounds.width * 0.055)
+                .position(x: UIScreen.main.bounds.width * 0.94, y: UIScreen.main.bounds.height * 0.09)
                 .onTapGesture {
                     isMute.toggle()
                 }
@@ -340,6 +341,7 @@ struct Level4View: View {
     func checkCorrect(){
         if(currentCard1X == -235 && currentCard1Y == 485 && currentCard2X == -55 && currentCard2Y == 462 && currentCard3X == -330 && currentCard3Y == 280 && currentCard5X == -281 && currentCard5Y == 290 && currentCard4X == -663 && currentCard4Y == 260){
             isCorrect.toggle()
+            SoundManager.instance.playSound()
             withAnimation(.spring(duration: 1)) {
 //                currentCard1X = 0
 //                currentCard1Y = 0
