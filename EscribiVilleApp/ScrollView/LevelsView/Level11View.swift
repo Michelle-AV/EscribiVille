@@ -71,6 +71,7 @@ struct Level11View: View {
                 .onTapGesture {
                     withAnimation(.spring(duration: 0.2)){
                         level11.toggle()
+                        numPagina = 1
                         inputA = ""
                         inputL = ""
                         inputG = ""
@@ -83,6 +84,18 @@ struct Level11View: View {
                         inputE2 = ""
                         inputN = ""
                         inputA4 = ""
+                        displayA = ""
+                        displayL = ""
+                        displayG = ""
+                        displayA2 = ""
+                        displayP = ""
+                        displayE = ""
+                        displayZ = ""
+                        displayA3 = ""
+                        displayR = ""
+                        displayE2 = ""
+                        displayN = ""
+                        displayA4 = ""
                     }
                 }
             
@@ -98,6 +111,89 @@ struct Level11View: View {
             ZStack{
                 
                 if numPagina == 1 {
+                
+                    Image("ejPez")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: UIScreen.main.bounds.width * 0.80, height: UIScreen.main.bounds.height * 0.9)
+                    // PALABRA PEZ - P
+                    Text("P")
+                        .font(.custom("futura", fixedSize: 90).bold())
+                        .foregroundStyle(Color.GrisClaro)
+                        //.frame(width: UIScreen.main.bounds.width * 0.09)
+                        .position(x: UIScreen.main.bounds.width * 0.35, y: UIScreen.main.bounds.height * 0.72)
+                    TextField("", text: $inputP)
+                         .font(.custom("futura", fixedSize: 90).bold())
+                         .frame(width: UIScreen.main.bounds.width * 0.09)
+                         .position(x: UIScreen.main.bounds.width * 0.355, y: UIScreen.main.bounds.height * 0.72)
+                         .foregroundColor(Color.ArenaOscura)
+                         .padding(.horizontal)
+                         .onTapGesture {
+                             displayP = ""
+                             inputP = ""
+                         }
+                         .onChange(of: inputP) { newValue in
+                             if newValue.lowercased() == "p" {
+                                 displayP = "P"
+                                 checkCorrect()
+                             } else {
+                                 inputP = ""
+                                 displayP = ""
+                             }
+                         }
+                     
+                    // PALABRA PEZ - E
+                    Text("E")
+                        .font(.custom("futura", fixedSize: 90).bold())
+                        .foregroundStyle(Color.GrisClaro)
+                        .position(x: UIScreen.main.bounds.width * 0.49, y: UIScreen.main.bounds.height * 0.72)
+                    
+                    TextField("", text: $inputE)
+                         .font(.custom("futura", fixedSize: 90).bold())
+                         .frame(width: UIScreen.main.bounds.width * 0.09)
+                         .position(x: UIScreen.main.bounds.width * 0.50, y: UIScreen.main.bounds.height * 0.72)
+                         .foregroundColor(Color.ArenaOscura)
+                         .padding(.horizontal)
+                         .onTapGesture {
+                             displayE = ""
+                             inputE = ""
+                         }
+                         .onChange(of: inputE) { newValue in
+                             if newValue.lowercased() == "e" {
+                                 displayE = "E"
+                                 checkCorrect()
+                             } else {
+                                 inputE = ""
+                                 displayE = ""
+                             }
+                         }
+                    // PALABRA PEZ - Z
+                    Text("Z")
+                        .font(.custom("futura", fixedSize: 90).bold())
+                        .foregroundStyle(Color.GrisClaro)
+                        .position(x: UIScreen.main.bounds.width * 0.63, y: UIScreen.main.bounds.height * 0.72)
+                    TextField("", text: $inputZ)
+                         .font(.custom("futura", fixedSize: 90).bold())
+                         .frame(width: UIScreen.main.bounds.width * 0.09)
+                         .position(x: UIScreen.main.bounds.width * 0.633, y: UIScreen.main.bounds.height * 0.72)
+                         .foregroundColor(Color.ArenaOscura)
+                         .padding(.horizontal)
+                         .onTapGesture {
+                             displayZ = ""
+                             inputZ = ""
+                         }
+                         .onChange(of: inputZ) { newValue in
+                             if newValue.lowercased() == "z" {
+                                 displayZ = "Z"
+                                 checkCorrect()
+                             } else {
+                                 inputZ = ""
+                                 displayZ = ""
+                             }
+                         }
+                    
+                } else if numPagina == 2 {
+                    
                     Image("ejAlga")
                          .resizable()
                          .scaledToFit()
@@ -229,88 +325,6 @@ struct Level11View: View {
                         .bold()
                         .foregroundStyle(Color.ArenaOscura)
                         .position(x: UISW * 1.180, y: UISH * 0.72)
-                    
-                    
-                } else if numPagina == 2 {
-                    Image("ejPez")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: UIScreen.main.bounds.width * 0.80, height: UIScreen.main.bounds.height * 0.9)
-                    // PALABRA PEZ - P
-                    Text("P")
-                        .font(.custom("futura", fixedSize: 90).bold())
-                        .foregroundStyle(Color.GrisClaro)
-                        //.frame(width: UIScreen.main.bounds.width * 0.09)
-                        .position(x: UIScreen.main.bounds.width * 0.35, y: UIScreen.main.bounds.height * 0.72)
-                    TextField("", text: $inputP)
-                         .font(.custom("futura", fixedSize: 90).bold())
-                         .frame(width: UIScreen.main.bounds.width * 0.09)
-                         .position(x: UIScreen.main.bounds.width * 0.355, y: UIScreen.main.bounds.height * 0.72)
-                         .foregroundColor(Color.ArenaOscura)
-                         .padding(.horizontal)
-                         .onTapGesture {
-                             displayP = ""
-                             inputP = ""
-                         }
-                         .onChange(of: inputP) { newValue in
-                             if newValue.lowercased() == "p" {
-                                 displayP = "P"
-                                 checkCorrect()
-                             } else {
-                                 inputP = ""
-                                 displayP = ""
-                             }
-                         }
-                     
-                    // PALABRA PEZ - E
-                    Text("E")
-                        .font(.custom("futura", fixedSize: 90).bold())
-                        .foregroundStyle(Color.GrisClaro)
-                        .position(x: UIScreen.main.bounds.width * 0.49, y: UIScreen.main.bounds.height * 0.72)
-                    
-                    TextField("", text: $inputE)
-                         .font(.custom("futura", fixedSize: 90).bold())
-                         .frame(width: UIScreen.main.bounds.width * 0.09)
-                         .position(x: UIScreen.main.bounds.width * 0.50, y: UIScreen.main.bounds.height * 0.72)
-                         .foregroundColor(Color.ArenaOscura)
-                         .padding(.horizontal)
-                         .onTapGesture {
-                             displayE = ""
-                             inputE = ""
-                         }
-                         .onChange(of: inputE) { newValue in
-                             if newValue.lowercased() == "e" {
-                                 displayE = "E"
-                                 checkCorrect()
-                             } else {
-                                 inputE = ""
-                                 displayE = ""
-                             }
-                         }
-                    // PALABRA PEZ - Z
-                    Text("Z")
-                        .font(.custom("futura", fixedSize: 90).bold())
-                        .foregroundStyle(Color.GrisClaro)
-                        .position(x: UIScreen.main.bounds.width * 0.63, y: UIScreen.main.bounds.height * 0.72)
-                    TextField("", text: $inputZ)
-                         .font(.custom("futura", fixedSize: 90).bold())
-                         .frame(width: UIScreen.main.bounds.width * 0.09)
-                         .position(x: UIScreen.main.bounds.width * 0.633, y: UIScreen.main.bounds.height * 0.72)
-                         .foregroundColor(Color.ArenaOscura)
-                         .padding(.horizontal)
-                         .onTapGesture {
-                             displayZ = ""
-                             inputZ = ""
-                         }
-                         .onChange(of: inputZ) { newValue in
-                             if newValue.lowercased() == "z" {
-                                 displayZ = "Z"
-                                 checkCorrect()
-                             } else {
-                                 inputZ = ""
-                                 displayZ = ""
-                             }
-                         }
                     
                 } else if numPagina == 3 {
                     Image("ejArena")
